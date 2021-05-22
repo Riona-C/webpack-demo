@@ -7,41 +7,38 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'development',
   entry: {
-    // 多入口
-    home: './src/index.js',
-    other: './src/other.js'
+    home: './src/index.js'
   },
-  watch: true, // 实时打包监控
-  watchOptions: { // 监控的选项
-    poll: 1000, // 一秒问1000次
-    aggregateTimeout: 500, // 防抖
-    ignored: /node_modules/ // 不需要监控某个东西
+  devServer: {
+    contentBase: './dist',
+    open: true,
+    // 1) 直接代理到服务器
+    // proxy: {
+      // '/api': { // 请求时加api前缀
+      //   target: 'http://localhost:3000',
+      //   pathRewrite: {'/api': ''} // 代理到接口端重写接口
+      // }
+    // }
+    // 2) 前端单纯的模拟数据
+    // before(app) { 
+    //   app.get('/api/user', (req, res)=> {
+    //     res.json({
+    //       "code": 0 
+    //     })
+    //   });
+    // }
+    // 3) 有服务端的情况 不用代理处理 在服务端启动webpack, 端口用服务端端口,借助webpack-dev-middleware的中间件
+    // 参考server.js中的配置，直接运行server.js即可调试本地请求
   },
   output: {
-    // 输出多个出口
     filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
-      filename: 'home.html',
-      chunks: ['home'] // 代码块
+      filename: 'home.html'
     }),
-    new HtmlWebpackPlugin({
-      template: './index.html',
-      filename: 'other.html',
-      chunks: ['other']
-    }),
-    new CleanWebpackPlugin(), // 要清空的文件夹，如果有多个，可以传入一个数组
-    new CopyWebpackPlugin({  // 拷贝插件
-      patterns: [
-        {
-          from: path.resolve(__dirname, 'doc'), 
-          to: 'doc'
-        }
-      ]
-    }),
-    new webpack.BannerPlugin('make 2021-05-22 ranran') // 在打包后的js文件头部添加版权声明
+    new CleanWebpackPlugin() // 要清空的文件夹，如果有多个，可以传入一个数组
   ]
 }
