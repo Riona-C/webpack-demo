@@ -7,28 +7,30 @@
 npm install
 ```
 
-### 打包并启动监听
+### 执行打包
 ```
-npm run watch
-```
-
-### 自定义服务器脚本打包
-```
-npm run server
+npx webpack
 ```
 
-### 启动本地服务
-```
-npm run dev
-```
+### 多入口
+详细查看webpack.config.js的entry、output配置
 
-### 打包js，es6转es5语法需借助一下依赖
-```
-babel-loader、@babel/polyfill、@babel/preset-env
-```
+### html模板文件打包插件
+html-webpack-plugin
 
-### 打包react的jsx语法需要借助
-```
-@babel/preset-react
-```
+### 打包前先清除上次打包结果插件
+clean-webpack-plugin
 
+### 打包前先清除上次打包结果插件
+clean-webpack-plugin
+
+### 打包时拷贝指定文件到打包目录
+copy-webpack-plugin
+
+### 打包实时监听
+watch、watchOptions实现
+
+### 给打包后的js文件头部添加版权声明
+BannerPlugin
+
+##### 以上配置均在此分支上实现，可参考webapck.config.js文件中相关配置
