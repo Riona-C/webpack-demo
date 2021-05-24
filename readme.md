@@ -12,20 +12,20 @@ yarn install
 npx webpack
 ```
 
-### 1.对于不需要解析的库配置 noParse
-如：jquery，不需要解析jquery模块，因为jquery中没有依赖其他模块代码
-配置方法：在module中配置
-
-### 2.resolve解析配置
-```
-resolve: { // 解析第三方包 
-  modules: [path.resolve('node_modules')], // 只解析node_modules下的文件，若node_modules下查找不到，则不再向外层查找
-  alias: { // 给引入的路径取别名
-    bootstrap: 'bootstrap/dist/css/bootstrap.css'
-  },
-  mainFields: ['style', 'main'], // 引入资源的时候先引style样式入口，再找main的js入口
-  extensions: ['.js','.css','.json','.vue'] // 自动添加扩展名，先找js文件，找不到就找css文件，再找不到就找json文件
+### 1.定义环境变量
+可使用webpack自带的插件，来定义环境变量，可通过环境变量来判断当前处于什么环境，执行那些代码
+```js
+let url = '';
+// 使用env变量区分当前环境，使用webpack自带definePlugin插件进行定义环境变量
+if (ENV) {
+  url = 'http://localhost:3000'
+} else {
+  url = 'http://www.test.com'
 }
+console.log('---------', ENV); // 实际取到的是字符串
+console.log('---------', EXPORESSION); // 实际取到的是计算结果
+console.log('---------', typeof FLAG); // 实际取到的是布尔值
 ```
+
 
 
