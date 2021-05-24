@@ -1,67 +1,31 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+
 module.exports = {
-  mode: 'development', // 开发环境
-  devtool: 'cheap-source-map', // 热更新
-  entry: {
-    main: './src/index.js' // 打包入口文件
-  },
-  output: { // 打包输出配置
-    publicPath: '/',
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  devServer: { // 本地开发服务器
-    contentBase: './dist', // 在哪个目录下启动服务器
-    open: true,
-    port: 8080,
-    hot: true,
-    hotOnly: true
-  },
-  module: { // loader模块打包配置
+  mode: 'development',
+  entry: './src/index.js',
+  module: {
+    noParse: /jquery/, // 不需要解析jquery模块，因为jquery中没有依赖其他模块代码
     rules: [{
       test: /\.js$/,
-      exclude: /node_modules/, // 对node_modules不需要做转译
-      loader: 'babel-loader'
-    },{
-      test: /\.(jpg|png|gif)$/,
       use: {
-        loader: 'url-loader',
-        options: {
-          name: '',
-          outputPath: 'images/',
-          limit: 10240
+        loader: 'babel-loader',
+        options: { // 配置预设
+          presets: [
+            '@babel/preset-env',
+            '@babel/preset-react'
+          ]
         }
       }
-    },{
-      test: /\.scss$/,
-      use: [
-        'style-loader',
-        {
-          loader: 'css-loader',
-          options: {
-            importLoaders: 2
-          }
-        },
-        'scss-loader',
-        'postcss-loader'
-      ]
-    },{
-      test: /\.css$/,
-      use: [
-        'style-loader',
-        'css-loader',
-        'postcss-loader'
-      ]
     }]
   },
-  plugins: [ // 插件
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html', // 要拷贝的模板
-      filename: 'index.html', // 拷贝之后的html文件名
-      hash: true // 给引入的js文件加上一个hash值
-    }),
-    new webpack.HotModuleReplacementPlugin() // 使用webpack的热更新插件
+      template: './public/index.html'
+    })
   ]
 }

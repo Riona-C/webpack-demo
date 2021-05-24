@@ -1,4 +1,4 @@
-### webpack基础配置
+### webpack优化配置
 
 ### author: 小橙子
 
@@ -7,28 +7,10 @@
 npm install
 ```
 
-### 打包并启动监听
-```
-npm run watch
-```
+### 对于不需要解析的库配置 noParse
+如：jquery，不需要解析jquery模块，因为jquery中没有依赖其他模块代码
+配置方法：在module中配置
 
-### 自定义服务器脚本打包
-```
-npm run server
-```
 
-### 启动本地服务
-```
-npm run dev
-```
 
-### 打包js，es6转es5语法需借助一下依赖
-```
-babel-loader、@babel/polyfill、@babel/preset-env
-```
-
-### 打包react的jsx语法需要借助
-```
-@babel/preset-react
-```
 
