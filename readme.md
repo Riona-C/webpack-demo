@@ -4,7 +4,12 @@
 
 ### 安装依赖
 ```
-npm install
+yarn install
+```
+
+### 打包
+```
+npx webpack
 ```
 
 ### 对于不需要解析的库配置 noParse
