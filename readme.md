@@ -12,11 +12,11 @@ yarn install
 npx webpack
 ```
 
-### 对于不需要解析的库配置 noParse
+### 1.对于不需要解析的库配置 noParse
 如：jquery，不需要解析jquery模块，因为jquery中没有依赖其他模块代码
 配置方法：在module中配置
 
-### resolve解析配置
+### 2.resolve解析配置
 ```
 resolve: { // 解析第三方包 
   modules: [path.resolve('node_modules')], // 只解析node_modules下的文件，若node_modules下查找不到，则不再向外层查找
