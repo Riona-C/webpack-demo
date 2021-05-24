@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack-dev-server --open --config webpack.dev.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +25,8 @@
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-middleware": "^4.3.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.7.3"
   },
   "dependencies": {
     "react": "^17.0.2",
